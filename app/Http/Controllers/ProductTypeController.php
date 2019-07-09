@@ -14,7 +14,9 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        //
+        $rs = ProductType::all();
+
+        return view('admin.products.ProductTypeList',compact('rs'));
     }
 
     /**
@@ -25,6 +27,7 @@ class ProductTypeController extends Controller
     public function create()
     {
         //
+        return view('admin.products.ProductTypeAdd');
     }
 
     /**
@@ -36,6 +39,13 @@ class ProductTypeController extends Controller
     public function store(Request $request)
     {
         //
+        $typeName = $request->input('typeName');
+        $orm = new ProductType();
+        $orm->name = $typeName;
+        $orm->save();
+        $this->myRedirect('admin/product/typeadd','ok');
+        //return redirect('admin/product/typeadd')->;   //必须加return
+       
     }
 
     /**
@@ -81,5 +91,10 @@ class ProductTypeController extends Controller
     public function destroy(ProductType $productType)
     {
         //
+    }
+    function myRedirect($url,$msg){
+        echo "<script>alert('$msg');
+        location.href='$url'
+        </script>";
     }
 }

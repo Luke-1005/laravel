@@ -1,6 +1,6 @@
 <?php
-Route::group(['prefix'=>'admin'],function(){
-	Route::get('producttypeadd',function(){
-		return view('admin.products,Prod')
-	})
+
+Route::group(['prefix'=>'admin/product'],function(){
+	Route::get('typeadd','ProductTypeController@index');
+	Route::post('typeadd','ProductTypeController@store');
 });
